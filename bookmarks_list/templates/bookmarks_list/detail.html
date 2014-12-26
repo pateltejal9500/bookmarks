@@ -1,0 +1,41 @@
+<h1>{{list.name}}</h1>
+<a href={% url 'bookmarks_list:index'%}>HOME</a>
+
+{% if links %}
+  <ul>
+  {% for link in links %}
+    <li>Name: {{link.name}} 
+    <br>
+    Link: {{link.link_url}} 
+    <br>
+    {% if link.tag %}
+      Tag: {{link.tag}}</li>
+      <br>
+    {% endif %}
+
+    {% if user.is_authenticated %}      
+      <form method="POST" action="{% url 'bookmarks_list:delete' link.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="list_id" value="{{list.id}}">
+        <button> DELETE </button>
+      </form>
+    {% endif %}
+  {% endfor %}
+    </ul>
+{% else %}
+  <p>No Links Are Available.</p>
+{% endif %}
+
+{% if user.is_authenticated %} 
+  <form action="{% url 'bookmarks_list:add_link' list.id %}" method="GET">
+    <button> ADD LINK </button>
+  </form>
+{% else %}
+  <form action="{% url 'bookmarks_list:loginPerson'%}" method="GET">
+    <button> LOGIN </button>  
+  </form>
+  <form action="{% url 'bookmarks_list:register'%}" method="GET">
+    <button> REGISTER </button>
+  </form>
+{% endif %}

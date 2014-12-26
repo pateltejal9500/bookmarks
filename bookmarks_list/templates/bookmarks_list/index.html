@@ -1,0 +1,31 @@
+<h1>LISTS</h1>
+
+{% if lists %}
+    <ul>
+    {% for list in lists %}
+        <li><a href="{% url 'bookmarks_list:detail' list.id %}">{{list.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Lists Are Available.</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+  <form action="{% url 'bookmarks_list:add'%}" method="GET">
+    <button> ADD LIST </button>
+  </form>
+
+  <form action="{% url 'bookmarks_list:logoutPerson'%}" method="GET">
+    <button> Logout </button>
+  </form>
+
+{% else %}
+  <form action="{% url 'bookmarks_list:loginPerson'%}" method="GET">
+    <button> LOGIN </button>
+  </form>
+
+  <form action="{% url 'bookmarks_list:register'%}" method="GET">
+    <button> REGISTER </button>
+  </form>
+
+{% endif %}

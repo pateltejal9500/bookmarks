@@ -1,0 +1,13 @@
+<form action="{% url 'bookmarks_list:add'%}" method="POST"> 
+  {% csrf_token %}
+{{form}}
+<button> ADD </button>
+</form>
+
+<script>
+ {% if messages %}
+    {% for message in messages %}
+        alert(message);
+    {% endfor %}
+  {% endif %}
+</script>

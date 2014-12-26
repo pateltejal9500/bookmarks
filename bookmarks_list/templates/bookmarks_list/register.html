@@ -1,0 +1,6 @@
+<form action="{% url 'bookmarks_list:register'%}" method="POST">
+   {% csrf_token %}
+   {{form}}
+
+  <button> REGISTER </button>
+</form>
