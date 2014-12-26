@@ -2,9 +2,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django import forms
-from django.db.models.signals import post_save
-
-
 
 class Link(models.Model):
   name = models.CharField(max_length=50)
@@ -31,7 +28,6 @@ class UserProfile(models.Model):
   def __str__(self):             
       return self.user.username
   
- 
 class ListForm(forms.Form):
   name = forms.CharField(label='Name', max_length=50)
 
