@@ -1,7 +1,6 @@
 <form action="{% url 'bookmarks_list:add_link' list_id %}" method="POST"> 
   {% csrf_token %}
 {{form}}
-
 <button> ADD Link </button>
 </form>
 
