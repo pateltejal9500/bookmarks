@@ -20,7 +20,7 @@ def index(request):
 
 def detail(request, list_id):
   try:
-    p = List.objects.get(pk=list_id)
+    listNumber= List.objects.get(pk=list_id)
   except List.DoesNotExist:
     raise Http404
   links = Link.objects.filter(list=list_id)
@@ -35,8 +35,8 @@ def add(request):
     form = ListForm(request.POST)
     if form.is_valid():
       name = form.cleaned_data['name']
-      l = List(name=name, date_created=timezone.now(), date_modified=timezone.now())
-      l.save()
+      newList = List(name=name, date_created=timezone.now(), date_modified=timezone.now())
+      newList.save()
       return HttpResponseRedirect("/bookmarks_list/")
     else:
       messages.error(request, "Error")
@@ -54,9 +54,9 @@ def add_link(request, list_id):
       url = form.cleaned_data['url']
       tag = form.cleaned_data['tag']
       name = form.cleaned_data['name']
-      l = Link(name=name, link_url=url, date_created=timezone.now(), date_modified=timezone.now(), tag=tag)
-      l.save()
-      list_of_link.link.add(l)
+      newLink = Link(name=name, link_url=url, date_created=timezone.now(), date_modified=timezone.now(), tag=tag)
+      newLink.save()
+      list_of_link.link.add(newLink)
       return HttpResponseRedirect("/bookmarks_list/"+list_id)
     else:
       messages.error(request, "Error")
